@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+import Employees from '../employees/Employees'
+import EmployeesFilter from '../employees/EmployeesFilter'
 
-const Home=()=> {
-    return (
-        <div>
-            <h1>home</h1>
-        </div>
-    )
-}
+const Home = () => {
+  return (
+    <div>
+      <EmployeesFilter/>
+      <Employees/>
+    </div>
+  );
+};
 export default Home;
