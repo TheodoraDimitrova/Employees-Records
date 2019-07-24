@@ -8,6 +8,8 @@ import EmployeeDetails from './components/employees/EmployeeDetails';
 import EmployeeEdit from './components/employees/EmployeeEdit';
 import EmployeeForm from './components/employees/EmployeeForm';
 import Profile from './components/profile/Profile';
+import Register from './components/auth/Register'
+import Login from './components/auth/Login'
 
 import EmployeeState from './context/employee/EmployeeState';
 import AuthState from './context/auth/AuthState';
@@ -28,11 +30,9 @@ const App = () => {
                 <Route exact path="/details/:id" component={EmployeeDetails} />
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/add" component={EmployeeForm} />
-                <Route
-                  exact
-                  path="/employee/edit/:id"
-                  component={EmployeeEdit}
-                />
+                <Route exact path="/employee/edit/:id" component={EmployeeEdit}/>
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
               </Switch>
             </div>
           </Router>

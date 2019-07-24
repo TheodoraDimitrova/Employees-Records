@@ -6,84 +6,46 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   LOGIN_FAIL,
+  REGISTER_SUCCESS,
+  REMOVE_ALERT,
+  AUTH_ERROR,
+  CLEAR_ERRORS
 } from '../types';
 
 const AuthState = props => {
   const initialState = {
-      token:localStorage.getItem('token'),
-      isAuthenticated:null,
-      loading:true,
-      error:null,
-      user:null
-    
+    token: localStorage.getItem('token'),
+    isAuthenticated: null,
+    loading: true,
+    error: null,
+    user: null
   };
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
-  //Load user
-  const addEmployee = employee => {
-    dispatch({
-      type: ADD_EMPLOYEE,
-      payload: employee
-    });
-  };
   //Register User
-  const setEmployee = id => {
-    dispatch({
-      type: SET_CURRENT,
-      payload: id
-    });
-  };
+
   //Login user
-  const clearCurrent = () => {
-    dispatch({
-      type: CLEAR_CURRENT
-    });
-  };
 
   //Logout
-  const updateEmployee = employee => {
-    dispatch({
-      type: UPDATE_EMPLOYEE,
-      payload: employee
-    });
-  };
 
   //clear errors
-  const filterEmployees = text => {
-    dispatch({
-      type: FILTER_EMPLOYEES,
-      payload: text
-    });
-  };
 
   //clear_filtered
-  const clearFilter = () => {
-    dispatch({
-      type: CLEAR_FILTER
-    });
-  };
 
   //delete_employee
-  const deleteEmployee = id => {
-    dispatch({
-      type: DELETE_EMPLOYEE,
-      payload: id
-    });
-  };
 
   return (
-    <EmployeeContext.Provider
+    <AuthContext.Provider
       value={{
-       token:state.token,
-       loading:state.loading,
-       error:state.error,
-       isAuthenticated:state.isAuthenticated,
-       user:state.user
-
+        token: state.token,
+        loading: state.loading,
+        error: state.error,
+        isAuthenticated: state.isAuthenticated,
+        user: state.user
       }}
     >
       {props.children}
-    </EmployeeContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
