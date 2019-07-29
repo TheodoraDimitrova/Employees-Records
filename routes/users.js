@@ -19,11 +19,13 @@ router.post('/',
   ],
   async (req, res) => {
     const errors = validationResult(req); //result from validation
+    console.log(req.body)
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() }); // do something if hasErrors is true
     }
     //hash password and return jsonwebtoken
     const { name, email, password } = req.body;
+   
     try {
       let user = await User.findOne({ email });
       if (user) {
@@ -35,8 +37,10 @@ router.post('/',
         email,
         password
       });
+      console.log(user)
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt); //hash password
+    
       await user.save(); //save user
 
       const payload = {

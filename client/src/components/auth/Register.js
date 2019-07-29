@@ -1,20 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AuthContext from '../../context/auth/AuthContext';
+import AlertContext from '../../context/alert/AlertContext';
 
-export default function Register() {
+const Register = () => {
+  const alertContext = useContext(AlertContext);
+  const authContext = useContext(AuthContext);
   const [user, setUser] = useState({
     name: '',
     email: '',
     password: ''
   });
-
-  const onChange = (e) => {
-      setUser({...user,[e.target.name]:[e.target.value]})
-  };
-  const onSubmit = (e) => {
-      e.preventDefault()
-      console.log(user)
-  };
   const { name, email, password } = user;
+
+  const { setAlert } = alertContext;
+  const { register } = authContext;
+  
+  const onChange = e => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = e => {
+    e.preventDefault();
+    let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    if (!regName.test(name)) {
+      setAlert('Please enter your full name (first & last name).', 'danger');
+    }
+    register({ name,email,password});
+  
+  };
+  const showPassword = () => {
+    let x = document.getElementById('password');
+    if (x.type === 'password') {
+      x.type = 'text';
+    } else {
+      x.type = 'password';
+    }
+  };
+
   return (
     <div className="form-container">
       <h1>
@@ -39,6 +61,7 @@ export default function Register() {
             value={email}
             onChange={onChange}
             required
+            title="Enter valid email"
           />
         </div>
         <div className="form-group">
@@ -49,11 +72,21 @@ export default function Register() {
             name="password"
             value={password}
             onChange={onChange}
+            pattern="(?=.*\d)(?=.*[a-z]).{6,10}"
+            title="Must contain at least one number and lowercase letters, and at least 6 to 10 characters"
+            id="password"
             required
           />
+          <input type="checkbox" onClick={showPassword} /> Show Password
         </div>
-        <input type="submit" value='Register' className="btn btn-block btn-primary"/>
+        <input
+          type="submit"
+          value="Register"
+          className="btn btn-block btn-primary"
+        />
       </form>
     </div>
   );
-}
+};
+
+export default Register;

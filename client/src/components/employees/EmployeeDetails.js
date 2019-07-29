@@ -2,18 +2,24 @@ import React, { useEffect, Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import EmployeeContext from '../../context/employee/EmployeeContext';
 
-const EmployeeDetails = (props) => {
+const EmployeeDetails = props => {
   const employeeContext = useContext(EmployeeContext);
-  const { setEmployee, current, clearCurrent,deleteEmployee } = employeeContext;
+  const {
+    setEmployee,
+    current,
+    clearCurrent,
+    deleteEmployee
+  } = employeeContext;
 
-  useEffect(() => {           //componentDidMount
-    const id =props. match.params.id;
+  useEffect(() => {
+    //componentDidMount
+    const id = props.match.params.id;
     setEmployee(id);
     //eslint-disable-next-line
   }, []); //run once
   const onDelete = () => {
-    deleteEmployee(props.match.params.id)
-    clearCurrent()
+    deleteEmployee(props.match.params.id);
+    clearCurrent();
     props.history.push('/');
   };
   if (current) {

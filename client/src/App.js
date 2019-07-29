@@ -10,20 +10,25 @@ import EmployeeForm from './components/employees/EmployeeForm';
 import Profile from './components/profile/Profile';
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
+import Alerts from './components/layout/Alerts'
 
 import EmployeeState from './context/employee/EmployeeState';
 import AuthState from './context/auth/AuthState';
-
+import AlertState from './context/alert/AlertState'
+import ProfileState from './context/profile/ProfileState'
 import './App.css';
 
 const App = () => {
   return (
     <AuthState>
-      <EmployeeState>
+     <ProfileState>
+     <EmployeeState>
+        <AlertState>
         <Fragment>
           <Router>
             <Navbar />
             <div className="container">
+              <Alerts />
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/about" component={About} />
@@ -37,7 +42,10 @@ const App = () => {
             </div>
           </Router>
         </Fragment>
+        </AlertState>
+     
       </EmployeeState>
+     </ProfileState>
     </AuthState>
   );
 };
