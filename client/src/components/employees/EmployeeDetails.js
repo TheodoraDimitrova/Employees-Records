@@ -1,9 +1,12 @@
 import React, { useEffect, Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../layout/Loader';
 import EmployeeContext from '../../context/employee/EmployeeContext';
+import AuthContext from '../../context/auth/AuthContext';
 
 const EmployeeDetails = props => {
   const employeeContext = useContext(EmployeeContext);
+  const authContext = useContext(AuthContext);
   const {
     setEmployee,
     current,
@@ -12,7 +15,7 @@ const EmployeeDetails = props => {
   } = employeeContext;
 
   useEffect(() => {
-    //componentDidMount
+    authContext.loadUser();
     const id = props.match.params.id;
     setEmployee(id);
     //eslint-disable-next-line
@@ -22,6 +25,9 @@ const EmployeeDetails = props => {
     clearCurrent();
     props.history.push('/');
   };
+  if (authContext.loading) {
+    return <Loader />;
+  }
   if (current) {
     return (
       <Fragment>
@@ -112,7 +118,7 @@ const EmployeeDetails = props => {
       </Fragment>
     );
   }
-  return <h1>Loading...</h1>;
+  return <Loader />;
 };
 
 export default EmployeeDetails;

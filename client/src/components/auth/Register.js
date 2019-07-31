@@ -1,20 +1,31 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect} from 'react';
 import AuthContext from '../../context/auth/AuthContext';
 import AlertContext from '../../context/alert/AlertContext';
 
-const Register = () => {
+const Register = (props) => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
+  const { setAlert } = alertContext;
+  const { register,error ,clearErrors,isAuthenticated} = authContext;
+  useEffect(() => {
+    
+    if (isAuthenticated){
+       props.history.push('/')
+    }
+   if (error === 'E-mail already in use') {
+     setAlert(error,'danger')
+     clearErrors()
+   }
+
+   //eslint-disable-next-line
+  }, [error,isAuthenticated,props.history])
+
   const [user, setUser] = useState({
     name: '',
     email: '',
     password: ''
   });
   const { name, email, password } = user;
-
-  const { setAlert } = alertContext;
-  const { register } = authContext;
-  
   const onChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
@@ -24,8 +35,10 @@ const Register = () => {
     let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
     if (!regName.test(name)) {
       setAlert('Please enter your full name (first & last name).', 'danger');
+    }else{
+       register({ name,email,password});
     }
-    register({ name,email,password});
+   
   
   };
   const showPassword = () => {
