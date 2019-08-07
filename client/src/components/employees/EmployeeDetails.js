@@ -15,15 +15,17 @@ const EmployeeDetails = props => {
   } = employeeContext;
 
   useEffect(() => {
+  
     authContext.loadUser();
     const id = props.match.params.id;
     setEmployee(id);
     //eslint-disable-next-line
   }, []); //run once
   const onDelete = () => {
-    deleteEmployee(props.match.params.id);
-    clearCurrent();
-    props.history.push('/');
+     deleteEmployee(current._id);
+     clearCurrent();
+     props.history.push('/');
+    
   };
   if (authContext.loading) {
     return <Loader />;
@@ -54,7 +56,7 @@ const EmployeeDetails = props => {
               style={{ cursor: 'pointer', color: 'red', float: 'right' }}
               onClick={onDelete}
             />
-            <Link to={`/employee/edit/${current.id}`}>
+            <Link to={`/employee/edit/${current._id}`}>
               <i
                 className="fas fa-pencil-alt fa-2x"
                 style={{

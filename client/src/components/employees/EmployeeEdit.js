@@ -1,19 +1,21 @@
 import React, { useEffect, useContext, useState } from 'react';
 import EmployeeContext from '../../context/employee/EmployeeContext';
 import AuthContext from '../../context/auth/AuthContext'
+import AlertContext from '../../context/alert/AlertContext'
 import Loader from '../layout/Loader'
 
 const EmployeeEdit = (props, { match }) => {
   const employeeContext = useContext(EmployeeContext);
   const authContext = useContext(AuthContext)
-  const { current, clearCurrent, updateEmployee } = employeeContext;
-
+  const alertContext=useContext(AlertContext)
+  const { current, clearCurrent, updateEmployee, loading } = employeeContext;
+  const {setAlert}=alertContext
   useEffect(() => {
     authContext.loadUser()
     if (current !== null) {
       setEdited(current);
     }
-    
+     //eslint-disable-next-line
   }, [employeeContext, current]);
 
   const [edited, setEdited] = useState({
@@ -32,12 +34,19 @@ const EmployeeEdit = (props, { match }) => {
     setEdited({ ...edited, [e.target.name]: e.target.value });
   };
   const onSubmit = e => {
+   
     e.preventDefault();
-    updateEmployee(edited);
-    clearCurrent();
-    props.history.push('/');
+    let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    if (!regName.test(edited.name)) {
+      setAlert('Please enter full name of employee (first & last name).', 'danger');
+    }else{
+      updateEmployee(edited);
+      clearCurrent();
+      props.history.push('/');
+    }
+   
   };
-  if(authContext.loading){
+  if(authContext.loading || loading){
     return <Loader/>
   }else{
     if (current) {
@@ -47,6 +56,7 @@ const EmployeeEdit = (props, { match }) => {
           <input
             type="text"
             pattern="[A-Za-z ]{1,32}"
+            title="Employee name must contain only letters"
             placeholder="Enter name"
             value={edited.name}
             name="name"
@@ -160,7 +170,7 @@ const EmployeeEdit = (props, { match }) => {
         </form>
       );
     }
-    return <h1>Loading...</h1>;
+    return <Loader/>
   }
 };
 

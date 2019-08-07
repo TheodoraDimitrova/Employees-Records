@@ -13,6 +13,7 @@ router.get('/', auth, async (req, res) => {
   try {
     const employees = await Employee.find({ user: req.user.id }).sort({date: -1});
     res.json(employees);
+   
 
   } catch (err) {
     console.log(err.message);
@@ -56,12 +57,13 @@ router.post('/',
     } = req.body;
     try {
       let employee = await Employee.findOne({ email, user: req.user.id });
+     
       if (employee) {
         return res
           .status(400)
           .json({ msg: 'You already record employee with such a email' });
       }
-      employee = new Employee({
+     let newEmployee = new Employee({
         user: req.user.id,
         name,
         age,
@@ -73,7 +75,8 @@ router.post('/',
         education_qualification,
         nationality
       });
-      await employee.save();
+      
+      employee=await newEmployee.save();
       res.json(employee)
 
     } catch (err) {
@@ -136,6 +139,7 @@ router.put('/:id',auth,async(req, res) => {
 // desc Delete employee
 // @access Private
 router.delete('/:id',auth,async (req, res) => {
+ 
   try {
     let employee = await Employee.findById(req.params.id);
     if (!employee) {

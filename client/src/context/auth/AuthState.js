@@ -8,7 +8,6 @@ import {
   LOGOUT,
   LOGIN_FAIL,
   REGISTER_SUCCESS,
-  REMOVE_ALERT,
   CLEAR_ERRORS,
   AUTH_ERROR,
   REGISTER_FAIL,
@@ -59,7 +58,6 @@ const AuthState = props => {
       });
       loadUser();
     } catch (error) {
-      console.log(error.response.data.msg);
       dispatch({
         type: REGISTER_FAIL,
         payload: error.response.data.msg

@@ -1,21 +1,19 @@
 import React, { useState, useContext, useEffect } from 'react';
 import EmployeeContext from '../../context/employee/EmployeeContext';
-import uuid from 'uuid';
+import AlertContext from '../../context/alert/AlertContext';
 import AuthContext from '../../context/auth/AuthContext';
 
 import Loader from '../layout/Loader';
 
-const EmployeeAdd = props => {
+const EmployeeForm = props => {
   const authContext = useContext(AuthContext);
-
+  const alertContext = useContext(AlertContext);
   const employeeContext = useContext(EmployeeContext);
-  useEffect(() => {
-    authContext.loadUser();
-    // eslint-disable-next-line
-  }, []);
+
+  const { setAlert } = alertContext;
+  const { addEmployee, error, clearErrors, loading, current } = employeeContext;
 
   const [employee, setEmployee] = useState({
-    _id: uuid(),
     name: '',
     age: 18,
     email: '',
@@ -26,6 +24,37 @@ const EmployeeAdd = props => {
     education_qualification: '',
     nationality: ''
   });
+
+  useEffect(() => {
+    authContext.loadUser();
+    if (current) {
+      props.history.push('/');
+      setEmployee({
+        name: '',
+        age: 18,
+        email: '',
+        gender: 'Male',
+        contact_number: '',
+        githubusername: '',
+        employment_status: 'Active',
+        education_qualification: '',
+        nationality: ''
+      });
+    }
+   
+    if (error === 'You already record employee with such a email') {
+      setAlert(error, 'danger');
+      clearErrors();
+    }
+    if (Array.isArray(error)) {
+      error.forEach(el => {
+        setAlert(el.msg, 'danger');
+      });
+      clearErrors();
+    }
+    //eslint-disable-next-line
+  }, [error, props.history,current]);
+
   const {
     name,
     age,
@@ -42,25 +71,21 @@ const EmployeeAdd = props => {
   };
   const onSubmit = e => {
     e.preventDefault();
-
-    employeeContext.addEmployee(employee);
-    setEmployee({
-      id: uuid(),
-      name: '',
-      age: 18,
-      email: '',
-      gender: 'Male',
-      contact_number: '',
-      githubusername: '',
-      employment_status: 'Active',
-      education_qualification: '',
-      nationality: ''
-    });
-    props.history.push('/');
+    let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    if (!regName.test(employee.name)) {
+      setAlert('Please enter full name of employee (first & last name).', 'danger');
+      clearErrors()
+    }else{
+      addEmployee(employee);
+    }
+    
   };
   if (authContext.loading) {
     return <Loader />;
   } else {
+    if (loading) {
+      return <Loader />;
+    }
     return (
       <form onSubmit={onSubmit}>
         <h2 className="text-primary">Add Employee</h2>
@@ -181,4 +206,4 @@ const EmployeeAdd = props => {
   }
 };
 
-export default EmployeeAdd;
+export default EmployeeForm;

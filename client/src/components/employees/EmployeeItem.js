@@ -12,7 +12,7 @@ const EmployeeItem=({employee})=> {
       <span className={'badge '+(employee.employment_status==='Active'?'badge-success':'badge-danger')}>{employee.employment_status}</span>
       </h3>
       <div>
-        <Link to={`/details/${employee.id}`} className="btn btn-dark btn-sm my-1">
+        <Link to={`/details/${employee._id}`} className="btn btn-dark btn-sm my-1">
           More
         </Link>
       </div>

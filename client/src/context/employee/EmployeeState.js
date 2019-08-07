@@ -1,74 +1,73 @@
 import React, { useReducer } from 'react';
-
+import axios from 'axios';
 import EmployeeContext from './EmployeeContext';
 import EmployeeReducer from './EmployeeReducer';
 import {
   ADD_EMPLOYEE,
+  GET_EMPLOYEES,
   UPDATE_EMPLOYEE,
   DELETE_EMPLOYEE,
   SET_CURRENT,
   CLEAR_CURRENT,
   FILTER_EMPLOYEES,
-  CLEAR_FILTER
+  CLEAR_FILTER,
+  ADD_ERROR,
+  CLEAR_EMPERRORS
 } from '../types';
 
 const EmployeeState = props => {
   const initialState = {
-    employees: [
-      {
-        id: '1',
-        user: '5d2e4172e2de9321ec43a9cf',
-        name: 'first employee',
-        age: 22,
-        email: 'first@abv.bg',
-        gender: 'Female',
-        contact_number: '+359897452212',
-        githubusername: 'First Proto',
-        employment_status: 'Active',
-        education_qualification: 'JS developer',
-        nationality: 'Bulgarian',
-        date: '2019-07-19T19:35:32.776Z'
-      },
-      {
-        id: '2',
-        user: '5d2e4172e2de9321ec43a9cf',
-        name: 'second employee',
-        age: 22,
-        email: 'second@abv.bg',
-        gender: 'Female',
-        contact_number: '+359897452212',
-        githubusername: 'SECond',
-        employment_status: 'Inactive',
-        education_qualification: 'JS developer',
-        nationality: 'Bulgarian',
-        date: '2019-07-19T19:35:32.776Z'
-      },
-      {
-        id: '3',
-        user: '5d2e4172e2de9321ec43a9cf',
-        name: 'PavPetiael Petrov',
-        age: 42,
-        email: 'third@abv.bg',
-        gender: 'Male',
-        contact_number: '+359897452292',
-        githubusername: 'Pafeto',
-        employment_status: 'Active',
-        education_qualification: 'JS developer',
-        nationality: 'Bulgarian',
-        date: '2019-07-19T19:35:32.776Z'
-      }
-    ],
+    employees: [],
     current: null,
-    filtered: null
+    filtered: null,
+    error: null,
+    loading: true,
+    success:false
   };
   const [state, dispatch] = useReducer(EmployeeReducer, initialState);
 
   //add employee
-  const addEmployee = employee => {
-    dispatch({
-      type: ADD_EMPLOYEE,
-      payload: employee
-    });
+  const addEmployee = async employee => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    try {
+      const res = await axios.post('api/employees', employee, config);
+      dispatch({
+        type: ADD_EMPLOYEE,
+        payload: res.data
+      });
+    } catch (error) {
+      if (error.response.data.errors) {
+        dispatch({
+          type: ADD_ERROR,
+          payload: error.response.data.errors
+        });
+      } else {
+        dispatch({
+          type: ADD_ERROR,
+          payload: error.response.data.msg
+        });
+      }
+    }
+  };
+  //get all employees GET_EMPLOYEES
+  const getEmployees = async () => {
+    try {
+      const res = await axios.get('api/employees');
+
+      dispatch({
+        type: GET_EMPLOYEES,
+        payload: res.data
+      });
+    } catch (error) {
+      dispatch({
+        type: ADD_ERROR,
+        payload: error.response.data.msg
+      });
+    }
   };
   //set current employee
   const setEmployee = id => {
@@ -85,11 +84,28 @@ const EmployeeState = props => {
   };
 
   //update_employee
-  const updateEmployee = employee => {
-    dispatch({
-      type: UPDATE_EMPLOYEE,
-      payload: employee
-    });
+  const updateEmployee = async employee => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    try {
+      const res = await axios.put(
+        `/api/employees/${employee._id}`,
+        employee,
+        config
+      );
+      dispatch({
+        type: UPDATE_EMPLOYEE,
+        payload: res.data
+      });
+    } catch (error) {
+      dispatch({
+        type: ADD_ERROR,
+        payload: error.response.data.msg
+      });
+    }
   };
 
   //filter_employees
@@ -108,10 +124,27 @@ const EmployeeState = props => {
   };
 
   //delete_employee
-  const deleteEmployee = id => {
+  const deleteEmployee = async id => {
+    try {
+      await axios.delete(`/api/employees/${id}`);
+      
+      dispatch({
+        type: DELETE_EMPLOYEE,
+        payload:id
+      });
+    } catch (error) {
+   
+      dispatch({
+        type: ADD_ERROR,
+        payload: error.response.data.msg
+      });
+    }
+  
+  };
+  //clear errors
+  const clearErrors = () => {
     dispatch({
-      type: DELETE_EMPLOYEE,
-      payload: id
+      type: CLEAR_EMPERRORS
     });
   };
 
@@ -120,14 +153,19 @@ const EmployeeState = props => {
       value={{
         employees: state.employees,
         current: state.current,
-        filtered:state.filtered,
+        filtered: state.filtered,
+        error: state.error,
+        loading: state.loading,
+        success:state.success,
         addEmployee,
+        getEmployees,
         deleteEmployee,
         setEmployee,
         clearCurrent,
         updateEmployee,
         clearFilter,
-        filterEmployees
+        filterEmployees,
+        clearErrors
       }}
     >
       {props.children}

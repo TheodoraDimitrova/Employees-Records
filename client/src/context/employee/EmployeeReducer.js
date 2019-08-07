@@ -1,11 +1,14 @@
 import {
   ADD_EMPLOYEE,
+  GET_EMPLOYEES,
   SET_CURRENT,
   CLEAR_CURRENT,
   DELETE_EMPLOYEE,
   UPDATE_EMPLOYEE,
   CLEAR_FILTER,
-  FILTER_EMPLOYEES
+  FILTER_EMPLOYEES,
+  ADD_ERROR,
+  CLEAR_EMPERRORS
 } from '../types';
 
 export default (state, action) => {
@@ -13,38 +16,52 @@ export default (state, action) => {
     case ADD_EMPLOYEE:
       return {
         ...state,
-        employees: [...state.employees, action.payload]
+        employees: [...state.employees, action.payload],
+        current: action.payload,
+        loading: false
+      };
+    case GET_EMPLOYEES:
+      return {
+        ...state,
+        current: null,
+        employees: action.payload,
+        loading: false
       };
     case SET_CURRENT:
       return {
         ...state,
         current: [...state.employees].find(employee =>
-          employee.id === action.payload ? employee : null
-        )
+          employee._id === action.payload ? employee : null
+        ),
+        loading:false
       };
     case CLEAR_CURRENT:
       return {
         ...state,
-        current: null
+        current: null,
+        loading:false
       };
     case DELETE_EMPLOYEE:
       return {
         ...state,
         employees: state.employees.filter(
-          employee => employee.id !== action.payload
-        )
+          employee => employee._id !== action.payload
+        ),
+        loading: false
       };
     case UPDATE_EMPLOYEE:
       return {
         ...state,
-        employees: state.employees.map(employee =>
-          employee.id === action.payload.id ? action.payload : employee
-        )
+        employees:state.employees.map(employee =>
+          employee._id === action.payload._id ? action.payload : employee
+        ),
+        loading: false
       };
     case CLEAR_FILTER:
       return {
         ...state,
-        filtered: null
+        filtered: null,
+        loading:false
       };
     case FILTER_EMPLOYEES:
       return {
@@ -52,9 +69,21 @@ export default (state, action) => {
         filtered: state.employees.filter(employee => {
           const regex = new RegExp(`${action.payload}`, 'gi');
           return employee.name.match(regex) || employee.email.match(regex);
-        })
+        }),
+        loading:false
       };
-
+    case ADD_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false
+      };
+    case CLEAR_EMPERRORS:
+      return {
+        ...state,
+        error: null,
+        loading:false
+      };
     default:
       return state;
   }

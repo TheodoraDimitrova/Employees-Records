@@ -10,6 +10,7 @@ const Home = () => {
     authContext.loadUser();
     // eslint-disable-next-line
   }, []);
+ 
   if (authContext.loading) {
     return <Loader />;
   } else {

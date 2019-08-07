@@ -1,24 +1,23 @@
-import React, { useState, useContext,useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/AuthContext';
 import AlertContext from '../../context/alert/AlertContext';
 
-const Register = (props) => {
+const Register = props => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
   const { setAlert } = alertContext;
-  const { register,error ,clearErrors,isAuthenticated} = authContext;
+  const { register, error, clearErrors, isAuthenticated } = authContext;
   useEffect(() => {
-    
-    if (isAuthenticated){
-       props.history.push('/')
+    if (isAuthenticated) {
+      props.history.push('/');
     }
-   if (error === 'E-mail already in use') {
-     setAlert(error,'danger')
-     clearErrors()
-   }
+    if (error === 'E-mail already in use') {
+      setAlert(error, 'danger');
+      clearErrors();
+    }
 
-   //eslint-disable-next-line
-  }, [error,isAuthenticated,props.history])
+    //eslint-disable-next-line
+  }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
     name: '',
@@ -32,14 +31,13 @@ const Register = (props) => {
 
   const onSubmit = e => {
     e.preventDefault();
+
     let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
     if (!regName.test(name)) {
       setAlert('Please enter your full name (first & last name).', 'danger');
-    }else{
-       register({ name,email,password});
+    } else {
+      register({ name, email, password });
     }
-   
-  
   };
   const showPassword = () => {
     let x = document.getElementById('password');
