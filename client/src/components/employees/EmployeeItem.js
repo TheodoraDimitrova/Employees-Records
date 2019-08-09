@@ -7,7 +7,9 @@ const EmployeeItem=({employee})=> {
 
 
     return (
-        <div className="card text-center">
+      
+      <div className="col-sm-4">
+  <div className="card text-center">
       <h3>{employee.name}
       <span className={'badge '+(employee.employment_status==='Active'?'badge-success':'badge-danger')}>{employee.employment_status}</span>
       </h3>
@@ -15,8 +17,12 @@ const EmployeeItem=({employee})=> {
         <Link to={`/details/${employee._id}`} className="btn btn-dark btn-sm my-1">
           More
         </Link>
+    
+        </div>
+
       </div>
-    </div>
+      </div>
+      
     )
 }
 EmployeeItem.propTypes={

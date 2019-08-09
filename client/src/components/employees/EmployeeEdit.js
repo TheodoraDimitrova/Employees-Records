@@ -72,7 +72,7 @@ const EmployeeEdit = (props, { match }) => {
             required
           />
           <div className="form-row">
-            <div className="col-3">
+            <div className="col-sm-3">
               <h5>Enter age</h5>
               <input
                 type="number"
@@ -84,7 +84,7 @@ const EmployeeEdit = (props, { match }) => {
                 required
               />
             </div>
-            <div className="col-3">
+            <div className="col-sm-3">
               <h5>Employee Status</h5>
               <input
                 type="radio"
@@ -103,7 +103,7 @@ const EmployeeEdit = (props, { match }) => {
               />
               Inactive
             </div>
-            <div className="col-3">
+            <div className="col-sm-3">
               <h5>Select gender</h5>
               <input
                 type="radio"
@@ -122,7 +122,7 @@ const EmployeeEdit = (props, { match }) => {
               />
               Female{' '}
             </div>
-            <div className="col-3">
+            <div className="col-sm-3">
               <h5>Enter Phone number</h5>
               <input
                 type="tel"

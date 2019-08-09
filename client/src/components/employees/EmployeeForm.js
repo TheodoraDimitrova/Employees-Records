@@ -80,12 +80,9 @@ const EmployeeForm = props => {
     }
     
   };
-  if (authContext.loading) {
+  if (authContext.loading || loading) {
     return <Loader />;
-  } else {
-    if (loading) {
-      return <Loader />;
-    }
+  } 
     return (
       <form onSubmit={onSubmit}>
         <h2 className="text-primary">Add Employee</h2>
@@ -108,8 +105,8 @@ const EmployeeForm = props => {
           required
         />
         <div className="form-row">
-          <div className="col-3">
-            <h5>Enter age</h5>
+          <div className="col-sm-3">
+            <h5>Age</h5>
             <input
               type="number"
               value={age}
@@ -120,7 +117,7 @@ const EmployeeForm = props => {
               required
             />
           </div>
-          <div className="col-3">
+          <div className="col-sm-3">
             <h5>Employee Status</h5>
             <input
               type="radio"
@@ -138,7 +135,7 @@ const EmployeeForm = props => {
             />
             Inactive
           </div>
-          <div className="col-3">
+          <div className="col-sm-3">
             <h5>Select gender</h5>
             <input
               type="radio"
@@ -156,7 +153,7 @@ const EmployeeForm = props => {
             />
             Female{' '}
           </div>
-          <div className="col-3">
+          <div className="col-sm-3">
             <h5>Enter Phone number</h5>
             <input
               type="tel"
@@ -203,7 +200,7 @@ const EmployeeForm = props => {
         />
       </form>
     );
-  }
+  
 };
 
 export default EmployeeForm;

@@ -7,50 +7,63 @@ const Navbar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, user, logout } = authContext;
 
-
   const onLogout = () => {
     logout();
   };
 
   const guestLinks = (
-    <Fragment>
-      <li>
-        <Link to="/login">Login</Link>
+    <ul className="navbar-nav ml-auto">
+      <li className="nav-item">
+        <Link className="nav-link" to="/register">
+          Sign Up
+        </Link>
       </li>
-      <li>
-        <Link to="/register">Register</Link>
+      <li className="nav-item">
+        <Link className="nav-link" to="/login">
+          Login
+        </Link>
       </li>
-    </Fragment>
+    </ul>
   );
   const authLinks = (
-    <Fragment>
-      <li>Hello ,{user && user.name}!</li>
-
-      <li>
-        <Link to="/">All employees</Link>
+    <ul className="navbar-nav ml-auto">
+     
+      <div className="navbar-text text-white">
+      Hello ,{user && user.name}!
+     </div>
+      <li className="navbar-nav ml-auto">
+        <Link className="nav-link text-warning" to="/add">Add Employee</Link>
       </li>
-      <li>
-        <Link to="/add">Add Employee</Link>
+      <li className="navbar-nav ml-auto">
+        <Link className="nav-link text-warning" to="/about">About</Link>
       </li>
-      <li>
-        <Link to="/about">About</Link>
-      </li>
-      <li>
-        <a onClick={onLogout} href="#!">
+      <li className="navbar-nav ml-auto">
+        <a className="nav-link text-warning" onClick={onLogout} href="#!">
           <i className="fas fa-sign-out-alt" />
           <span className="hide-sm">Logout</span>
-        </a>{' '}
+        </a>
       </li>
-    </Fragment>
+    </ul>
   );
   return (
-    <div className="navbar bg-primary">
-      <h1>
-        <i className={icon} /> {title}
-      </h1>
-
-      <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
-    </div>
+    <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+      <div className="container">
+        <Link className="navbar-brand" to="/">
+          <i className={icon} /> {title}
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#mobile-nav"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div className="collapse navbar-collapse" id="mobile-nav">
+          {isAuthenticated ? authLinks : guestLinks}
+        </div>
+      </div>
+    </nav>
   );
 };
 Navbar.propTypes = {

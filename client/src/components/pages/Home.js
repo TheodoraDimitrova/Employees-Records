@@ -11,15 +11,13 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
  
-  if (authContext.loading) {
-    return <Loader />;
-  } else {
+
     return (
       <div>
         <EmployeesFilter />
         <Employees />
       </div>
     );
-  }
+  
 };
 export default Home;

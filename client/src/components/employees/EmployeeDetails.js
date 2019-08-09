@@ -1,4 +1,6 @@
 import React, { useEffect, Fragment, useContext } from 'react';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { Link } from 'react-router-dom';
 import Loader from '../layout/Loader';
 import EmployeeContext from '../../context/employee/EmployeeContext';
@@ -13,19 +15,34 @@ const EmployeeDetails = props => {
     clearCurrent,
     deleteEmployee
   } = employeeContext;
+  const id = props.match.params.id;
 
   useEffect(() => {
-  
     authContext.loadUser();
-    const id = props.match.params.id;
+
     setEmployee(id);
+
     //eslint-disable-next-line
-  }, []); //run once
+  }, [current]); //run once
   const onDelete = () => {
-     deleteEmployee(current._id);
-     clearCurrent();
-     props.history.push('/');
-    
+    confirmAlert({
+      title: 'Confirm to delete',
+      message: 'Are you sure to do this?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            deleteEmployee(current._id);
+            props.history.push('/');
+            clearCurrent();
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => props.history.push(`/details/${current._id}`)
+        }
+      ]
+    });
   };
   if (authContext.loading) {
     return <Loader />;
@@ -119,8 +136,9 @@ const EmployeeDetails = props => {
         </div>
       </Fragment>
     );
+  } else {
+    return <Loader />;
   }
-  return <Loader />;
 };
 
 export default EmployeeDetails;
