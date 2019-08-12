@@ -6,6 +6,7 @@ const app = express();
 
 //connect Database
 connectDB();
+
 //Init middleware
 app.use(express.json({extended:false}))//for excepting the body data
 
