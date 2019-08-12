@@ -42,7 +42,7 @@ const EmployeeDetails = props => {
         },
         {
           label: 'No',
-          onClick: () => props.history.push(`/details/${current._id}`)
+          onClick: () => props.history.push(`/employee/details/${current._id}`)
         }
       ]
     });
