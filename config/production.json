@@ -1,4 +1,0 @@
-{
-    "mongoURI": "mongodb+srv://js_teddybear:EJPri3HWQtt_wjm@employeesrecordsprod-3ljgh.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret": "D4UCEUCZSMH3UHZX"
-  }
