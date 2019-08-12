@@ -8,13 +8,11 @@ const EmployeeSchema = new Schema({
   email: { type: String, required: true, unique: true },
   gender: { type: String, enum: ['Male', 'Female'] },
   nationality: { type: String, required: true },
-  education_qualification: { type: String,required:true },
+  education_qualification: { type: String, required: true },
   date: { type: Date, default: Date.now },
-  contact_number: {type: String,required:true},
-  githubusername: { type: String ,required:true},
-  employment_status:{type: String, enum: ['Active', 'Inactive']}
+  contact_number: { type: String, required: true },
+  githubusername: { type: String, required: true },
+  employment_status: { type: String, enum: ['Active', 'Inactive'] }
 });
-
-
 
 module.exports = mongoose.model('employee', EmployeeSchema);
