@@ -9,9 +9,7 @@ connectDB();
 //Init middleware
 app.use(express.json({extended:false}))//for excepting the body data
 
-app.get('/', (req, res) =>
-  res.json({ msg: 'Welcome to the employee records API...' })
-);
+
 //Routes
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
