@@ -10,7 +10,7 @@ const Login = props => {
   const { login, error, clearErrors, isAuthenticated,loading } = authContext;
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push('/');
+      props.history.push('/dashboard');
     }
 
     if (error === 'Invalid email') {
@@ -52,9 +52,7 @@ const Login = props => {
     }
   };
   const { email, password } = user;
- if(loading){
-  return <Loader/>
- }
+
  return (
   <div className="form-container">
     <h1>

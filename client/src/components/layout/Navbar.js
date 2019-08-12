@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/AuthContext';
@@ -14,12 +14,12 @@ const Navbar = ({ title, icon }) => {
   const guestLinks = (
     <ul className="navbar-nav ml-auto">
       <li className="nav-item">
-        <Link className="nav-link" to="/register">
+        <Link className="nav-link text-warning" to="/register">
           Sign Up
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/login">
+        <Link className="nav-link text-warning" to="/login">
           Login
         </Link>
       </li>
@@ -27,7 +27,6 @@ const Navbar = ({ title, icon }) => {
   );
   const authLinks = (
     <ul className="navbar-nav ml-auto">
-     
       <div className="navbar-text text-white">
       Hello ,{user && user.name}!
      </div>
@@ -48,9 +47,11 @@ const Navbar = ({ title, icon }) => {
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
       <div className="container">
-        <Link className="navbar-brand" to="/">
+        {isAuthenticated?(<Link className="navbar-brand" to="/dashboard">
           <i className={icon} /> {title}
-        </Link>
+        </Link>):(<Link className="navbar-brand" to="/">
+          <i className={icon} /> {title}
+        </Link>)}   
         <button
           className="navbar-toggler"
           type="button"

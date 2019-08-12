@@ -23,6 +23,23 @@ body {
   background-color: #fff;
   color: #333;
 }
+img {
+  width: 100%;
+}
+
+.landing {
+  position: relative;
+  background: url('./img/business-2584713_1920.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 80vh;
+  margin-top: -24px;
+  margin-bottom: -50px;
+}
+
+.landing-inner {
+  padding-top: 80px;
+}
 
 a {
   color: var(--primary-color);

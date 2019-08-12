@@ -34,6 +34,7 @@ export default (state, action) => {
         ...action.payload,
         isAuthenticated: true,
         loading: false
+        
       };
     case REGISTER_FAIL:
     case AUTH_ERROR:

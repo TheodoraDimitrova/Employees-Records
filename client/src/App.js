@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import Landing from './components/pages/Landing';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import EmployeeDetails from './components/employees/EmployeeDetails';
@@ -25,6 +27,7 @@ import AlertState from './context/alert/AlertState'
 import setAuthToken from './utils/setAuthToken'
 import './App.css';
 
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -40,9 +43,10 @@ const App = () => {
             <div className="container">
               <Alerts />
               <Switch>
-                <PrivateRoute Route exact path="/" component={Home} />
+                <Route exact path="/" component={Landing} />
+                <PrivateRoute Route exact path="/dashboard" component={Home} />
                 <PrivateRoute Route exact path="/about" component={About} />
-                <PrivateRoute Route exact path="/details/:id" component={EmployeeDetails} />
+                <PrivateRoute Route exact path="/employee/details/:id" component={EmployeeDetails} />
                 <PrivateRoute Route exact path="/add" component={EmployeeForm} />
                 <PrivateRoute exact path="/employee/edit/:id" component={EmployeeEdit}/>
                 <Route exact path="/register" component={Register} />
@@ -50,6 +54,7 @@ const App = () => {
                 <Route component={NotFound} />
               </Switch>
             </div>
+            <Footer />
           </Router>
         </Fragment>
         </AlertState>

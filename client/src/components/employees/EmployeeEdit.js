@@ -42,7 +42,7 @@ const EmployeeEdit = (props, { match }) => {
     }else{
       updateEmployee(edited);
       clearCurrent();
-      props.history.push('/');
+      props.history.push('/dashboard');
     }
    
   };

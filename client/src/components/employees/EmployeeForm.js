@@ -28,7 +28,7 @@ const EmployeeForm = props => {
   useEffect(() => {
     authContext.loadUser();
     if (current) {
-      props.history.push('/');
+      props.history.push('/dashboard');
       setEmployee({
         name: '',
         age: 18,
@@ -80,9 +80,7 @@ const EmployeeForm = props => {
     }
     
   };
-  if (authContext.loading || loading) {
-    return <Loader />;
-  } 
+
     return (
       <form onSubmit={onSubmit}>
         <h2 className="text-primary">Add Employee</h2>

@@ -12,37 +12,43 @@ const Employees = () => {
     getEmployees();
     
     //eslint-disable-next-line
-  }, []);
-  if (loading) {
-    return <Loader />;
-  }
-  
-  if (employees.length === 0) {
-    return <h1>You don't have any records!</h1>;
-  }
-  if (filtered) {
-    return (
-      <div className="container">
-      <div className="row">
-     
-        {filtered.map(employee => (
-          <EmployeeItem key={employee._id} employee={employee} />
-        ))}
-      </div>
-      </div>
-      
-    );
+  }, [employees]);
+
+  if(employees===null || loading){
+    return <Loader/>
+  }else{
+    if(employees.length>0){
+      if (filtered) {
+        return (
+          <div className="container">
+          <div className="row">
+         
+            {filtered.map(employee => (
+              <EmployeeItem key={employee._id} employee={employee} />
+            ))}
+          </div>
+          </div>
+          
+        );
+      }
+      return (
+        <div className="container">
+        <div className="row">
+          {employees.map(employee => (
+            <EmployeeItem key={employee._id} employee={employee} />
+          ))}
+        </div>
+        </div>
+      );
+    }else{
+      return <h1>Don't exist any records</h1>
+    }
   }
 
-  return (
-    <div className="container">
-    <div className="row">
-      {employees.map(employee => (
-        <EmployeeItem key={employee._id} employee={employee} />
-      ))}
-    </div>
-    </div>
-  );
+
+  
+  
+ 
 };
 
 

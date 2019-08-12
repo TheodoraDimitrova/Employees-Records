@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import Employees from '../employees/Employees';
 import EmployeesFilter from '../employees/EmployeesFilter';
 import AuthContext from '../../context/auth/AuthContext';
-import Loader from '../../components/layout/Loader';
+import Loader from '../layout/Loader';
 
 const Home = () => {
   const authContext = useContext(AuthContext);
@@ -11,7 +11,9 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
  
-
+if(authContext.loading){
+  return <Loader/>
+}
     return (
       <div>
         <EmployeesFilter />
