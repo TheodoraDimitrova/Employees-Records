@@ -1,5 +1,4 @@
 {
-    
-    "mongoURI":"mongodb+srv://teddy_123:teddy_123@employeerecords-qpw8m.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret":"U7R5-NNFA-HWNR-JAG4"
+  "mongoURI": "mongodb+srv://teddy_123:teddy_123@employeerecords-qpw8m.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "U7R5-NNFA-HWNR-JAG4"
 }
