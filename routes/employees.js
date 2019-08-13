@@ -29,13 +29,10 @@ router.post('/',
     auth,
     [
       check('name', 'Please enter a name!').not().isEmpty(),
-      check('age', 'Please enter age').isNumeric(),
       check('email', 'Please include valid email!').isEmail(),
       check('gender', 'Please include male or female').not().isEmpty(),
-      check('contact_number','Please enter a mobile-Phone').isMobilePhone('bg-BG'),
-      check('githubusername', 'Please enter github username').not().isEmpty(),
-      check('employment_status', 'Please mark Employment Status').not().isEmpty(),
-      check('education_qualification', 'Please enter Qualifications').not().isEmpty(),
+     // check('contact_number','Please enter a mobile-Phone').isMobilePhone('bg-BG'),
+  
       check('nationality', 'Please enter nationality').not().isEmpty()
     ]
   ],
@@ -46,14 +43,24 @@ router.post('/',
     }
     const {
       name,
-      age,
+      DateOfBirth,
       email,
+      davis_email,
       gender,
+      drivingLicenceNo,
       contact_number,
-      githubusername,
+      reg_number,
       employment_status,
-      education_qualification,
-      nationality
+      dl_status,
+      address_2,
+      address_1,
+      nationality,
+      fd_number,
+      postcode,
+      dbs_certificate,
+      driver_app,
+      niNo,
+      application_status
     } = req.body;
     try {
       let employee = await Employee.findOne({ email, user: req.user.id });
@@ -66,14 +73,24 @@ router.post('/',
      let newEmployee = new Employee({
         user: req.user.id,
         name,
-        age,
+        DateOfBirth,
         email,
+        davis_email,
         gender,
+        drivingLicenceNo,
         contact_number,
-        githubusername,
+        reg_number,
         employment_status,
-        education_qualification,
-        nationality
+        dl_status,
+        address_2,
+        address_1,
+        nationality,
+        fd_number,
+        postcode,
+        dbs_certificate,
+        driver_app,
+        niNo,
+        application_status
       });
       
       employee=await newEmployee.save();
@@ -94,26 +111,47 @@ router.put('/:id',auth,async(req, res) => {
 
   const {
     name,
-    age,
+    DateOfBirth,
     email,
+    davis_email,
     gender,
     contact_number,
-    githubusername,
     employment_status,
-    education_qualification,
-    nationality
+    
+    driver_app,
+    dbs_certificate,
+    drivingLicenceNo,
+    dl_status,
+    address_1,
+    address_2,
+    postcode,
+    application_status,
+    niNo,
+    reg_number,
+    fd_number
   } = req.body;
   //build employee object
   const employeeObject={}
   if(name) employeeObject.name=name;
   if(email) employeeObject.email=email;
-  if(age) employeeObject.age=age;
+  if(davis_email) employeeObject.davis_email=davis_email;
+  if(DateOfBirth) employeeObject.DateOfBirth=DateOfBirth;
   if(gender) employeeObject.gender=gender;
   if(contact_number) employeeObject.contact_number=contact_number;
-  if(githubusername) employeeObject.githubusername=githubusername;
+ 
   if(employment_status) employeeObject.employment_status=employment_status;
-  if(education_qualification) employeeObject.education_qualification=education_qualification;
-  if(nationality) employeeObject.nationality=nationality;
+  
+  if(driver_app) employeeObject.driver_app=driver_app;
+  if(dbs_certificate) employeeObject.dbs_certificate=dbs_certificate;
+  if(drivingLicenceNo) employeeObject.drivingLicenceNo=drivingLicenceNo;
+  if(dl_status) employeeObject.dl_status=dl_status;
+  if(address_1) employeeObject.address_1=address_1;
+  if(address_2) employeeObject.address_2=address_2;
+  if(postcode) employeeObject.postcode=postcode;
+  if(application_status) employeeObject.application_status=application_status;
+  if(niNo) employeeObject.niNo=niNo;
+  if(reg_number) employeeObject.reg_number=reg_number;
+  if(fd_number) employeeObject.fd_number=fd_number;
   try {
     let employee = await Employee.findById(req.params.id);
     if (!employee) {

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../../context/auth/AuthContext';
 import AlertContext from '../../context/alert/AlertContext';
-import Loader from '../layout/Loader';
+//import Loader from '../layout/Loader';
 
 const Login = props => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
   const { setAlert } = alertContext;
-  const { login, error, clearErrors, isAuthenticated,loading } = authContext;
+  const { login, error, clearErrors, isAuthenticated } = authContext;
   useEffect(() => {
     if (isAuthenticated) {
       props.history.push('/dashboard');

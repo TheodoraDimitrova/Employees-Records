@@ -1,17 +1,17 @@
-import React ,{useState, useEffect, useContext} from 'react'
+import React ,{ useEffect, useContext} from 'react'
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/AuthContext';
-import Loader from '../layout/Loader';
+//import Loader from '../layout/Loader';
 
 const Landing=(props)=> {
     const authContext = useContext(AuthContext);
-    const { isAuthenticated ,loading} = authContext;
+    const { isAuthenticated } = authContext;
     useEffect(() => {
         if (isAuthenticated) {
             props.history.push('/dashboard');
           }
         
-    }, [])
+    }, [isAuthenticated,props.history])
 
     return (
        
