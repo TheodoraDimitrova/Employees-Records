@@ -119,7 +119,7 @@ router.put('/:id',auth,async(req, res) => {
     drivingLicenceNo,
     dl_status,
     address_1,
-    address_2,
+    town,
     postcode,
     application_status,
     niNo,
@@ -140,7 +140,7 @@ router.put('/:id',auth,async(req, res) => {
   if(drivingLicenceNo) employeeObject.drivingLicenceNo=drivingLicenceNo;
   if(dl_status) employeeObject.dl_status=dl_status;
   if(address_1) employeeObject.address_1=address_1;
-  if(address_2) employeeObject.address_2=address_2;
+  if(town) employeeObject.town=town;
   if(postcode) employeeObject.postcode=postcode;
   if(application_status) employeeObject.application_status=application_status;
   if(niNo) employeeObject.niNo=niNo;
