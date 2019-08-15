@@ -29,11 +29,7 @@ router.post('/',
     auth,
     [
       check('name', 'Please enter a name!').not().isEmpty(),
-      check('email', 'Please include valid email!').isEmail(),
-      check('gender', 'Please include male or female').not().isEmpty(),
-     // check('contact_number','Please enter a mobile-Phone').isMobilePhone('bg-BG'),
-  
-      check('nationality', 'Please enter nationality').not().isEmpty()
+      //check('email', 'Please include valid email!').isEmail()
     ]
   ],
   async (req, res) => {
@@ -63,13 +59,13 @@ router.post('/',
       application_status
     } = req.body;
     try {
-      let employee = await Employee.findOne({ email, user: req.user.id });
+      // let employee = await Employee.findOne({ email, user: req.user.id });
      
-      if (employee) {
-        return res
-          .status(400)
-          .json({ msg: 'You already record employee with such a email' });
-      }
+      // if (employee) {
+      //   return res
+      //     .status(400)
+      //     .json({ msg: 'You already record employee with such a email' });
+      // }
      let newEmployee = new Employee({
         user: req.user.id,
         name,
@@ -93,10 +89,11 @@ router.post('/',
         application_status
       });
       
-      employee=await newEmployee.save();
+      let employee=await newEmployee.save();
       res.json(employee)
 
     } catch (err) {
+      console.log("tuk")
       console.log(err.message);
       res.status(500).send('Server Error');
     }
@@ -117,7 +114,6 @@ router.put('/:id',auth,async(req, res) => {
     gender,
     contact_number,
     employment_status,
-    
     driver_app,
     dbs_certificate,
     drivingLicenceNo,
@@ -138,9 +134,7 @@ router.put('/:id',auth,async(req, res) => {
   if(DateOfBirth) employeeObject.DateOfBirth=DateOfBirth;
   if(gender) employeeObject.gender=gender;
   if(contact_number) employeeObject.contact_number=contact_number;
- 
   if(employment_status) employeeObject.employment_status=employment_status;
-  
   if(driver_app) employeeObject.driver_app=driver_app;
   if(dbs_certificate) employeeObject.dbs_certificate=dbs_certificate;
   if(drivingLicenceNo) employeeObject.drivingLicenceNo=drivingLicenceNo;

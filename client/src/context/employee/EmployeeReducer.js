@@ -68,7 +68,7 @@ export default (state, action) => {
         ...state,
         filtered: state.employees.filter(employee => {
           const regex = new RegExp(`${action.payload}`, 'gi');
-          return employee.name.match(regex) || employee.email.match(regex);
+          return employee.name.match(regex) || employee.fd_number.match(regex) || employee.reg_number.match(regex) || employee.postcode.match(regex) ;
         }),
         loading:false
       };

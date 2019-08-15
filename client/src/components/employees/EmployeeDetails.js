@@ -50,6 +50,22 @@ const EmployeeDetails = props => {
         <Link to="/dashboard" className="btn btn-light">
           Back to search
         </Link>
+        <i
+          className="fas fa-user-times fa-2x"
+          style={{ cursor: 'pointer', color: 'red', float: 'right' }}
+          onClick={onDelete}
+        />
+        <Link to={`/employee/edit/${current._id}`}>
+          <i
+            className="fas fa-pencil-alt fa-2x"
+            style={{
+              cursor: 'pointer',
+              color: 'green',
+              float: 'right',
+              marginRight: '1rem'
+            }}
+          />
+        </Link>
         <div className="card grid-2">
           <div className="all-center">
             <img
@@ -63,29 +79,14 @@ const EmployeeDetails = props => {
             <p>Email: {current.email}</p>
             <p>Davis: {current.davis_email}</p>
             <p>Address 1: {current.address_1}</p>
-            <p>Address 2: {current.address_2}</p>
+            <p>Town : {current.town}</p>
+            <p>Postcode : {current.postcode}</p>
             <p>Gender: {current.gender}</p>
             <p>Date Of Birth: {current.DateOfBirth}</p>
             <p>Nationality: {current.nationality}</p>
           </div>
 
           <div>
-            <i
-              className="fas fa-user-times fa-2x"
-              style={{ cursor: 'pointer', color: 'red', float: 'right' }}
-              onClick={onDelete}
-            />
-            <Link to={`/employee/edit/${current._id}`}>
-              <i
-                className="fas fa-pencil-alt fa-2x"
-                style={{
-                  cursor: 'pointer',
-                  color: 'green',
-                  float: 'right',
-                  marginRight: '1rem'
-                }}
-              />
-            </Link>
             <ul>
               <li>
                 <Fragment>
@@ -102,13 +103,7 @@ const EmployeeDetails = props => {
                   </h3>
                 </Fragment>
               </li>
-              <li>
-                <Fragment>
-                  <h3 className="text-left">
-                    Postcode: <span>{current.postcode}</span>
-                  </h3>
-                </Fragment>
-              </li>
+             
               <li>
                 <Fragment>
                   <h3 className="text-left">
@@ -159,7 +154,7 @@ const EmployeeDetails = props => {
                   </h3>
                 </Fragment>
               </li>
-             
+
               {/* <li>
                   {current.drivingLicenceNo && (
                     <Fragment>

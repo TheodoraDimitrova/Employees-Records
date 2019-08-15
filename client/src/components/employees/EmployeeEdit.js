@@ -33,7 +33,7 @@ const EmployeeEdit = (props, { match }) => {
     drivingLicenceNo: '',
     dl_status: '',
     address_1: '',
-    address_2: '',
+    town: '',
     postcode: '',
     application_status: '',
     niNo: '',
@@ -82,7 +82,6 @@ const EmployeeEdit = (props, { match }) => {
           value={edited.email}
           name="email"
           onChange={onChange}
-          required
         />
         <input
           type="email"
@@ -101,7 +100,7 @@ const EmployeeEdit = (props, { match }) => {
               value={edited.DateOfBirth}
               name="DateOfBirth"
               onChange={onChange}
-              required
+            
             />
           </div>
           <div className="col-sm-2 text-center">
@@ -149,7 +148,7 @@ const EmployeeEdit = (props, { match }) => {
               type="tel"
               className="form-control"
               pattern="((\+44(\s\(0\)\s|\s0\s|\s)?)|0)7\d{3}(\s)?\d{6}"
-              required
+              
               placeholder="Enter valid phone"
               title="Format 07513438167,07513 438167 or +44 (0) 7513 438167"
               value={edited.contact_number}
@@ -216,7 +215,7 @@ const EmployeeEdit = (props, { match }) => {
               name="niNo"
               onChange={onChange}
               placeholder="Enter NINo"
-              required
+              
             />
           </div>
           <div className="col-sm-3">
@@ -227,14 +226,13 @@ const EmployeeEdit = (props, { match }) => {
               name="postcode"
               onChange={onChange}
               placeholder="Enter Postcode"
-              required
+              
             />
           </div>
           <div className="col-sm-3">
             <h5>FD</h5>
             <input
               type="text"
-              required
               placeholder="Enter FD"
               value={edited.fd_number}
               name="fd_number"
@@ -245,7 +243,6 @@ const EmployeeEdit = (props, { match }) => {
             <h5>Van registration</h5>
             <input
               type="text"
-              required
               placeholder="Enter valid registration number"
               value={edited.reg_number}
               name="reg_number"
@@ -256,17 +253,17 @@ const EmployeeEdit = (props, { match }) => {
     
         <input
           type="text"
-          placeholder="Address 1"
+          placeholder="Address"
           value={edited.address_1}
           name="address_1"
           onChange={onChange}
-          required
+         
         />
         <input
           type="text"
-          placeholder="Address 2"
-          value={edited.address_2}
-          name="address_2"
+          placeholder="Town"
+          value={edited.town}
+          name="town"
           onChange={onChange}
         />
         <input
@@ -275,7 +272,7 @@ const EmployeeEdit = (props, { match }) => {
           value={edited.nationality}
           name="nationality"
           onChange={onChange}
-          required
+          
         />
   
         <div className="col-sm-12 text-center ">

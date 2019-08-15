@@ -21,8 +21,7 @@ const EmployeeState = props => {
     current: null,
     filtered: null,
     error: null,
-    loading: true,
-    success:false
+    loading: true
   };
   const [state, dispatch] = useReducer(EmployeeReducer, initialState);
 
@@ -127,19 +126,17 @@ const EmployeeState = props => {
   const deleteEmployee = async id => {
     try {
       await axios.delete(`/api/employees/${id}`);
-      
+
       dispatch({
         type: DELETE_EMPLOYEE,
-        payload:id
+        payload: id
       });
     } catch (error) {
-   
       dispatch({
         type: ADD_ERROR,
         payload: error.response.data.msg
       });
     }
-  
   };
   //clear errors
   const clearErrors = () => {
@@ -156,7 +153,6 @@ const EmployeeState = props => {
         filtered: state.filtered,
         error: state.error,
         loading: state.loading,
-        success:state.success,
         addEmployee,
         getEmployees,
         deleteEmployee,

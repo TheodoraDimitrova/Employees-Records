@@ -5,7 +5,14 @@ import { Link } from 'react-router-dom';
 const EmployeeItem = ({ employee }) => {
   return (
     <div className="col-sm-4">
-      <div className="card text-center">
+      <div
+        className={
+          'card text-center border ' +
+          (employee.application_status === 'Complete'
+            ? 'border-success'
+            : 'border-danger')
+        }
+      >
         <h3>
           {employee.name}
           <span

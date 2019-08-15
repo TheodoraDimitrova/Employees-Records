@@ -13,7 +13,7 @@ const About = () => {
     return <Loader />;
   } else {
     return (
-      <div>
+      <div className="container">
         <h1>About this app</h1>
         <p className="my-1">
           This is a full stack React App (functional components and hooks) for
