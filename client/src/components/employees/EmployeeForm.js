@@ -32,7 +32,10 @@ const EmployeeForm = props => {
     application_status: 'Incomplete',
     niNo: '',
     reg_number: '',
-    fd_number: ''
+    fd_number: '',
+    utr:'',
+    utr_id:'',
+    utr_code:""
   });
 
   useEffect(() => {
@@ -71,7 +74,10 @@ const EmployeeForm = props => {
     fd_number,
     postcode,
     niNo,
-    application_status
+    application_status,
+    utr,
+    utr_id,
+    utr_code
   } = employee;
   const onChange = e => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
@@ -87,6 +93,7 @@ const EmployeeForm = props => {
       );
       clearErrors();
     }  else {
+     
       addEmployee(employee);
     }
   };
@@ -110,14 +117,17 @@ const EmployeeForm = props => {
       />
       <input
         type="email"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}"
         placeholder="Enter email"
         value={email}
         name="email"
         onChange={onChange}
-        
+        title="Enter valid email address"
       />
       <input
         type="email"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}"
+        title="Enter valid email address"
         placeholder="Enter DAVIS"
         value={davis_email}
         name="davis_email"
@@ -133,7 +143,6 @@ const EmployeeForm = props => {
             value={DateOfBirth}
             name="DateOfBirth"
             onChange={onChange}
-           
           />
         </div>
         <div className="col-sm-2 text-center">
@@ -209,7 +218,12 @@ const EmployeeForm = props => {
             onChange={onChange}
           />
           UK{' '}
-          <input type="radio" name="dl_status" value="EU" onChange={onChange} />
+          <input
+            type="radio"
+            name="dl_status"
+            value="EU"
+            onChange={onChange}
+          />
           EU{' '}
         </div>
         <div className="col-sm-3 text-center">
@@ -245,7 +259,6 @@ const EmployeeForm = props => {
             name="niNo"
             onChange={onChange}
             placeholder="Enter NINo"
-           
           />
         </div>
 
@@ -264,6 +277,8 @@ const EmployeeForm = props => {
           <input
             type="text"
             placeholder="Enter valid registration number"
+            pattern="(^[A-Z]{2}[0-9]{2}\s?[A-Z]{3}$)|(^[A-Z][0-9]{1,3}[A-Z]{3}$)|(^[A-Z]{3}[0-9]{1,3}[A-Z]$)|(^[0-9]{1,4}[A-Z]{1,2}$)|(^[0-9]{1,3}[A-Z]{1,3}$)|(^[A-Z]{1,2}[0-9]{1,4}$)|(^[A-Z]{1,3}[0-9]{1,3}$)|(^[A-Z]{1,3}[0-9]{1,4}$)|(^[0-9]{3}[DX]{1}[0-9]{3}$)"
+            title="Enter valid vehicle registration"
             value={reg_number}
             name="reg_number"
             onChange={onChange}
@@ -279,30 +294,57 @@ const EmployeeForm = props => {
             value={address_1}
             name="address_1"
             onChange={onChange}
-            
           />
         </div>
-        
+
         <div className="col-sm-4">
-       <input
-        type="text"
-        placeholder="Town"
-        value={town}
-        name="town"
-        onChange={onChange}
-      />
-       </div>
-      
-       <div className="col-sm-4">
           <input
             type="text"
-            pattern="^([A-Za-z][A-Ha-hJ-Yj-y]?[0-9][A-Za-z0-9]? ?[0-9][A-Za-z]{2}|[Gg][Ii][Rr] ?0[Aa]{2})$"
+            placeholder="Town"
+            value={town}
+            name="town"
+            onChange={onChange}
+          />
+        </div>
+
+        <div className="col-sm-4">
+          <input
+            type="text"
             value={postcode}
             name="postcode"
             onChange={onChange}
-            placeholder="Enter Postcode"
-            title="Please enter valid UK postcode."
-            
+            placeholder="Enter UK Postcode"
+          />
+        </div>
+      </div>
+      <div className="form-row">
+        <div className="col-sm-4">
+          <input
+            type="text"
+            placeholder="Unique Taxpayer Reference"
+            value={utr}
+            name="utr"
+            onChange={onChange}
+          />
+        </div>
+
+        <div className="col-sm-4">
+          <input
+            type="text"
+            placeholder="UTR Id"
+            value={utr_id}
+            name="utr_id"
+            onChange={onChange}
+          />
+        </div>
+
+        <div className="col-sm-4">
+          <input
+            type="text"
+            value={utr_code}
+            name="utr_code"
+            onChange={onChange}
+            placeholder="UTR Code"
           />
         </div>
       </div>
@@ -313,7 +355,6 @@ const EmployeeForm = props => {
         value={nationality}
         name="nationality"
         onChange={onChange}
-        
       />
 
       <div className="col-sm-12 text-center ">

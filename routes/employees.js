@@ -5,16 +5,15 @@ const auth = require('../middleware/auth');
 
 const Employee = require('../models/Employee');
 
-
 // @route GET api/employees
 // desc Get all employees
 // @access Private
 router.get('/', auth, async (req, res) => {
   try {
-    const employees = await Employee.find({ user: req.user.id }).sort({date: -1});
+    const employees = await Employee.find({ user: req.user.id }).sort({
+      date: -1
+    });
     res.json(employees);
-   
-
   } catch (err) {
     console.log(err.message);
     res.status(500).send('Server Error');
@@ -24,11 +23,14 @@ router.get('/', auth, async (req, res) => {
 // @route POST api/employees
 // desc Add new employee
 // @access Private
-router.post('/',
+router.post(
+  '/',
   [
     auth,
     [
-      check('name', 'Please enter a name!').not().isEmpty(),
+      check('name', 'Please enter a name!')
+        .not()
+        .isEmpty()
       //check('email', 'Please include valid email!').isEmail()
     ]
   ],
@@ -55,18 +57,23 @@ router.post('/',
       postcode,
       dbs_certificate,
       driver_app,
+      town,
       niNo,
-      application_status
+      application_status,
+      utr,
+      utr_id,
+      utr_code
     } = req.body;
+
     try {
       // let employee = await Employee.findOne({ email, user: req.user.id });
-     
+
       // if (employee) {
       //   return res
       //     .status(400)
       //     .json({ msg: 'You already record employee with such a email' });
       // }
-     let newEmployee = new Employee({
+      let newEmployee = new Employee({
         user: req.user.id,
         name,
         DateOfBirth,
@@ -83,17 +90,20 @@ router.post('/',
         nationality,
         fd_number,
         postcode,
+        town,
         dbs_certificate,
         driver_app,
         niNo,
-        application_status
+        application_status,
+        utr,
+        utr_id,
+        utr_code
       });
-      
-      let employee=await newEmployee.save();
-      res.json(employee)
 
+      let employee = await newEmployee.save();
+      res.json(employee);
     } catch (err) {
-      console.log("tuk")
+      console.log('tuk');
       console.log(err.message);
       res.status(500).send('Server Error');
     }
@@ -103,9 +113,8 @@ router.post('/',
 //@route PUT api/employees/:id
 // desc Update employee
 //@access Private
-     
-router.put('/:id',auth,async(req, res) => {
 
+router.put('/:id', auth, async (req, res) => {
   const {
     name,
     DateOfBirth,
@@ -124,36 +133,45 @@ router.put('/:id',auth,async(req, res) => {
     application_status,
     niNo,
     reg_number,
-    fd_number
+    fd_number,
+    utr,
+    utr_id,
+    utr_code,
+    nationality
   } = req.body;
+
   //build employee object
-  const employeeObject={}
-  if(name) employeeObject.name=name;
-  if(email) employeeObject.email=email;
-  if(davis_email) employeeObject.davis_email=davis_email;
-  if(DateOfBirth) employeeObject.DateOfBirth=DateOfBirth;
-  if(gender) employeeObject.gender=gender;
-  if(contact_number) employeeObject.contact_number=contact_number;
-  if(employment_status) employeeObject.employment_status=employment_status;
-  if(driver_app) employeeObject.driver_app=driver_app;
-  if(dbs_certificate) employeeObject.dbs_certificate=dbs_certificate;
-  if(drivingLicenceNo) employeeObject.drivingLicenceNo=drivingLicenceNo;
-  if(dl_status) employeeObject.dl_status=dl_status;
-  if(address_1) employeeObject.address_1=address_1;
-  if(town) employeeObject.town=town;
-  if(postcode) employeeObject.postcode=postcode;
-  if(application_status) employeeObject.application_status=application_status;
-  if(niNo) employeeObject.niNo=niNo;
-  if(reg_number) employeeObject.reg_number=reg_number;
-  if(fd_number) employeeObject.fd_number=fd_number;
+  const employeeObject = {};
+  if (name) employeeObject.name = name;
+  if (email) employeeObject.email = email;
+  if (davis_email) employeeObject.davis_email = davis_email;
+  if (DateOfBirth) employeeObject.DateOfBirth = DateOfBirth;
+  if (gender) employeeObject.gender = gender;
+  if (contact_number) employeeObject.contact_number = contact_number;
+  if (employment_status) employeeObject.employment_status = employment_status;
+  if (driver_app) employeeObject.driver_app = driver_app;
+  if (dbs_certificate) employeeObject.dbs_certificate = dbs_certificate;
+  if (drivingLicenceNo) employeeObject.drivingLicenceNo = drivingLicenceNo;
+  if (dl_status) employeeObject.dl_status = dl_status;
+  if (address_1) employeeObject.address_1 = address_1;
+  if (town) employeeObject.town = town;
+  if (postcode) employeeObject.postcode = postcode;
+  if (application_status)employeeObject.application_status = application_status;
+  if (niNo) employeeObject.niNo = niNo;
+  if (reg_number) employeeObject.reg_number = reg_number;
+  if (fd_number) employeeObject.fd_number = fd_number;
+  if (nationality) employeeObject.nationality = nationality;
+  if (utr) employeeObject.utr = utr;
+  if (utr_id) employeeObject.utr_id = utr_id;
+  if (utr_code) employeeObject.utr_code = utr_code;
   try {
     let employee = await Employee.findById(req.params.id);
     if (!employee) {
       return res.status(404).json({ msg: 'Employee not found' });
     }
     //make sure user owns employee
-    if(employee.user.toString() !==req.user.id){
-      return res.status(401).json({msg:'Not authorized'})
+    if (employee.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'Not authorized' });
     }
     employee = await Employee.findByIdAndUpdate(
       req.params.id,
@@ -170,24 +188,22 @@ router.put('/:id',auth,async(req, res) => {
 // @route DELETE api/employees/:id
 // desc Delete employee
 // @access Private
-router.delete('/:id',auth,async (req, res) => {
- 
+router.delete('/:id', auth, async (req, res) => {
   try {
     let employee = await Employee.findById(req.params.id);
     if (!employee) {
       return res.status(404).json({ msg: 'Employee not found' });
     }
     //make sure user owns employee
-    if(employee.user.toString() !==req.user.id){
-      return res.status(401).json({msg:'Not authorized'})
+    if (employee.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'Not authorized' });
     }
     employee = await Employee.findByIdAndRemove(req.params.id);
-    res.json({mgs:'Employee removed'});
+    res.json({ mgs: 'Employee removed' });
   } catch (err) {
     console.log(err.message);
     res.status(500).send('Server Error');
   }
-  
 });
 
 module.exports = router;

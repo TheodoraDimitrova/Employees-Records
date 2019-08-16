@@ -20,6 +20,7 @@ const EmployeeDetails = props => {
   useEffect(() => {
     authContext.loadUser();
     setEmployee(id);
+    
 
     //eslint-disable-next-line
   }, [current]);
@@ -46,13 +47,19 @@ const EmployeeDetails = props => {
 
   if (current) {
     return (
-      <Fragment>
+    
+        <Fragment>
         <Link to="/dashboard" className="btn btn-light">
           Back to search
         </Link>
+        <i class="fas fa-print fa-2x"
+         style={{ cursor: 'pointer', color: 'black', float: 'right' }}
+         onClick={() => window.print()}
+         ></i>
+         {" "}
         <i
           className="fas fa-user-times fa-2x"
-          style={{ cursor: 'pointer', color: 'red', float: 'right' }}
+          style={{ cursor: 'pointer', color: 'red', float: 'right', marginRight: '1rem'}}
           onClick={onDelete}
         />
         <Link to={`/employee/edit/${current._id}`}>
@@ -66,6 +73,8 @@ const EmployeeDetails = props => {
             }}
           />
         </Link>
+       
+       
         <div className="card grid-2">
           <div className="all-center">
             <img
@@ -154,6 +163,27 @@ const EmployeeDetails = props => {
                   </h3>
                 </Fragment>
               </li>
+              <li>
+                <Fragment>
+                  <h3 className="text-left">
+                    UTF : <span>{current.utr}</span>
+                  </h3>
+                </Fragment>
+              </li>
+              <li>
+                <Fragment>
+                  <h3 className="text-left">
+                    UTR ID : <span>{current.utr_id}</span>
+                  </h3>
+                </Fragment>
+              </li>
+              <li>
+                <Fragment>
+                  <h3 className="text-left">
+                    UTR Code : <span>{current.utr_code}</span>
+                  </h3>
+                </Fragment>
+              </li>
 
               {/* <li>
                   {current.drivingLicenceNo && (
@@ -167,7 +197,9 @@ const EmployeeDetails = props => {
             </ul>
           </div>
         </div>
+     
       </Fragment>
+
     );
   } else {
     return <h1>Back to dashboard</h1>;
