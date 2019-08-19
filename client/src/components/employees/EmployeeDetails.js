@@ -119,8 +119,8 @@ const EmployeeDetails = props => {
               <li><h5><span className="font-weight-bold">Additional driver application : </span> {current.driver_app}</h5></li>
               <li><h5><span className="font-weight-bold">DBS certificate : </span>{current.dbs_certificate}</h5></li>
               <li><h5><span className="font-weight-bold">UTR : </span>{current.utr}</h5></li>
-              <li><h5><span className="font-weight-bold">UTR ID : </span>{current.utr_id}</h5></li>
-              <li><h5><span className="font-weight-bold">UTR Code : </span>{current.utr_code}</h5></li>
+              <li><h5><span className="font-weight-bold">USER : </span>{current.utr_id}</h5></li>
+              <li><h5><span className="font-weight-bold">Code : </span>{current.utr_code}</h5></li>
             </ul>
           </div>
         </div>
