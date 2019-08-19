@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 const EmployeeItem = ({ employee }) => {
   return (
-    <div className="col-sm-4">
+    <div className="col-md-4 col-sm-6 col-xs-12 d-flex pb-3">
       <div
         className={
-          'card text-center border ' +
+          'card card-block text-center border ' +
           (employee.application_status === 'Complete'
             ? 'border-success'
             : 'border-danger')

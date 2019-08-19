@@ -33,7 +33,7 @@ const Employees = () => {
       }
       return (
         <div className="container">
-        <div className="row row-eq-height">
+        <div className="row equal">
           {employees.map(employee => (
             <EmployeeItem key={employee._id} employee={employee} />
           ))}
