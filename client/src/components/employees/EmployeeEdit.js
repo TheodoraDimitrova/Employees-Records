@@ -297,7 +297,7 @@ const EmployeeEdit = (props, { match }) => {
         <div className="col-sm-4">
           <input
             type="text"
-            placeholder="UTR Id"
+            placeholder="User ID"
             value={edited.utr_id}
             name="utr_id"
             onChange={onChange}
@@ -308,7 +308,7 @@ const EmployeeEdit = (props, { match }) => {
           <input
             type="text"
             value={edited.utr_code}
-            name="utr_code"
+            name="Code"
             onChange={onChange}
             placeholder="UTR Code"
           />

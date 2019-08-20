@@ -331,7 +331,7 @@ const EmployeeForm = props => {
         <div className="col-sm-4">
           <input
             type="text"
-            placeholder="UTR Id"
+            placeholder="User ID"
             value={utr_id}
             name="utr_id"
             onChange={onChange}
@@ -342,7 +342,7 @@ const EmployeeForm = props => {
           <input
             type="text"
             value={utr_code}
-            name="utr_code"
+            name="Code"
             onChange={onChange}
             placeholder="UTR Code"
           />
