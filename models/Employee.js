@@ -5,7 +5,7 @@ const EmployeeSchema = new Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
 
   name: { type: String, required: true },
-  email: { type: String },
+  email: { type: String ,unique: false},
   davis_email: { type: String },
   contact_number: { type: String },
   DateOfBirth: { type: String },
