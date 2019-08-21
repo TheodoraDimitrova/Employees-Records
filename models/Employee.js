@@ -26,6 +26,9 @@ const EmployeeSchema = new Schema({
   utr: { type: String },
   utr_id: { type: String },
   utr_code: { type: String },
+  passport: { type: String ,enum: ['Yes', 'No']},
+  Id: { type: String ,enum: ['Yes', 'No']},
+  dvla: { type: String ,enum: ['Yes', 'No']},
 
   date: { type: Date, default: Date.now }
 });

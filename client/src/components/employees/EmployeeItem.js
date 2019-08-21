@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const EmployeeItem = ({ employee }) => {
   return (
-    <div className="col-md-4 col-sm-6 col-xs-12 d-flex pb-3">
+    <div className="col-sm-6 col-md-4">
       <div
         className={
           'card card-block text-center border ' +
@@ -13,8 +13,12 @@ const EmployeeItem = ({ employee }) => {
             : 'border-danger')
         }
       >
-        <h3>
-          {employee.name}
+        <h3 style={style_1} className={
+          (employee.application_status === 'Complete'
+            ? 'bg-success'
+            : 'bg-danger')}>{employee.name}</h3>
+        <h4>
+          {' '}
           <span
             className={
               'badge ' +
@@ -25,7 +29,7 @@ const EmployeeItem = ({ employee }) => {
           >
             {employee.employment_status}
           </span>
-        </h3>
+        </h4>
         <div>
           <Link
             to={`/employee/details/${employee._id}`}
@@ -37,6 +41,10 @@ const EmployeeItem = ({ employee }) => {
       </div>
     </div>
   );
+};
+let style_1 = {
+ 
+  display: 'inline-block'
 };
 EmployeeItem.propTypes = {
   employee: PropTypes.object.isRequired

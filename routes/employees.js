@@ -62,7 +62,10 @@ router.post(
       application_status,
       utr,
       utr_id,
-      utr_code
+      utr_code,
+      passport,
+      Id,
+      dvla
     } = req.body;
 
     try {
@@ -97,13 +100,16 @@ router.post(
         application_status,
         utr,
         utr_id,
-        utr_code
+        utr_code,
+        passport,
+        Id,
+        dvla
       });
 
       let employee = await newEmployee.save();
       res.json(employee);
     } catch (err) {
-      console.log('tuk');
+      
       console.log(err.message);
       res.status(500).send('Server Error');
     }
@@ -137,7 +143,10 @@ router.put('/:id', auth, async (req, res) => {
     utr,
     utr_id,
     utr_code,
-    nationality
+    nationality,
+    passport,
+    Id,
+    dvla
   } = req.body;
 
   //build employee object
@@ -164,6 +173,9 @@ router.put('/:id', auth, async (req, res) => {
   if (utr) employeeObject.utr = utr;
   if (utr_id) employeeObject.utr_id = utr_id;
   if (utr_code) employeeObject.utr_code = utr_code;
+  if (passport) employeeObject.passport = passport;
+  if (Id) employeeObject.Id = Id;
+  if (dvla) employeeObject.dvla = dvla;
   try {
     let employee = await Employee.findById(req.params.id);
     if (!employee) {

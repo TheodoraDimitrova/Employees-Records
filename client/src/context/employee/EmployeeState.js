@@ -33,6 +33,7 @@ const EmployeeState = props => {
       }
     };
     try {
+      
       const res = await axios.post('api/employees', employee, config);
       dispatch({
         type: ADD_EMPLOYEE,

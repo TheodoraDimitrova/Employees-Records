@@ -35,7 +35,10 @@ const EmployeeForm = props => {
     fd_number: '',
     utr:'',
     utr_id:'',
-    utr_code:""
+    utr_code:"",
+    passport:"No",
+    Id:'No',
+    dvla:'No'
   });
 
   useEffect(() => {
@@ -78,6 +81,7 @@ const EmployeeForm = props => {
     utr,
     utr_id,
     utr_code
+   
   } = employee;
   const onChange = e => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
@@ -93,7 +97,7 @@ const EmployeeForm = props => {
       );
       clearErrors();
     }  else {
-     
+     console.log(employee)
       addEmployee(employee);
     }
   };
@@ -198,6 +202,40 @@ const EmployeeForm = props => {
       </div>
       <hr />
       <div className="form-row">
+     
+        <div className="col-sm-4 text-center">
+          <h5>Passport</h5>
+          <input
+            type="checkbox"
+            name="passport"
+            value="Yes"
+            onChange={onChange}
+          />
+          Yes{' '}
+        </div>
+        <div className="col-sm-4 text-center">
+          <h5>Id card</h5>
+          <input
+            type="checkbox"
+            name="Id"
+            value="Yes"
+            onChange={onChange}
+          />
+          Yes{' '}
+        </div>
+        <div className="col-sm-4 text-center">
+          <h5>DVLA</h5>
+          <input
+            type="checkbox"
+            name="dvla"
+            value="Yes"
+            onChange={onChange}
+          />
+          Yes{' '}
+        </div>
+      </div>
+      <hr/> 
+      <div className="form-row">
         <div className="col-sm-3">
           <h5>Driver's license</h5>
           <input
@@ -248,6 +286,7 @@ const EmployeeForm = props => {
         </div>
       </div>
       <hr />
+    
       <div className="form-row">
         <div className="col-sm-4">
           <h5>NINo</h5>
@@ -285,7 +324,6 @@ const EmployeeForm = props => {
           />
         </div>
       </div>
-
       <div className="form-row">
         <div className="col-sm-4">
           <input
@@ -317,6 +355,7 @@ const EmployeeForm = props => {
           />
         </div>
       </div>
+      
       <div className="form-row">
         <div className="col-sm-4">
           <input

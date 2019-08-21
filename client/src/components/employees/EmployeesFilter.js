@@ -24,9 +24,10 @@ const EmployeesFilter = () => {
         <input
           type="text"
           name="text"
-          placeholder="Filter by name or email"
+          placeholder="Filter by name, email, FD or Van Registration"
           value={text}
           onChange={onChange}
+          required
         />
         <input
           type="submit"

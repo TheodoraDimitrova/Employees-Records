@@ -20,7 +20,6 @@ const EmployeeDetails = props => {
   useEffect(() => {
     authContext.loadUser();
     setEmployee(id);
-    
 
     //eslint-disable-next-line
   }, [current]);
@@ -86,41 +85,146 @@ const EmployeeDetails = props => {
               style={{ width: '150px' }}
             />
             <h1>{current.name}</h1>
-            <h5><span className="font-weight-bold">Phone number : </span> {current.contact_number}</h5>
-           
-            <h5><span className="font-weight-bold">Email : </span> {current.email}</h5>
-            
-            <h5><span className="font-weight-bold">Davis : </span> {current.davis_email}</h5>
-       
-            <h5><span className="font-weight-bold">Address : </span> {current.address_1}</h5>
-         
-            <h5><span className="font-weight-bold">Town : </span> {current.town}</h5>
-       
-            <h5><span className="font-weight-bold">Postcode : </span> {current.postcode}</h5>
-    
-            <h5><span className="font-weight-bold">Gender : </span> {current.gender}</h5>
-          
-            <h5><span className="font-weight-bold">Date Of Birth : </span> {current.DateOfBirth}</h5>
-         
-            <h5><span className="font-weight-bold">Nationality : </span> {current.nationality}</h5>
-        
+            <h5>
+              <span className="font-weight-bold">Phone number : </span>{' '}
+              {current.contact_number}
+            </h5>
+
+            <h5>
+              <span className="font-weight-bold">Email : </span> {current.email}
+            </h5>
+
+            <h5>
+              <span className="font-weight-bold">Davis : </span>{' '}
+              {current.davis_email}
+            </h5>
+
+            <h5>
+              <span className="font-weight-bold">Address : </span>{' '}
+              {current.address_1}
+            </h5>
+
+            <h5>
+              <span className="font-weight-bold">Town : </span> {current.town}
+            </h5>
+
+            <h5>
+              <span className="font-weight-bold">Postcode : </span>{' '}
+              {current.postcode}
+            </h5>
+
+            <h5>
+              <span className="font-weight-bold">Gender : </span>{' '}
+              {current.gender}
+            </h5>
+
+            <h5>
+              <span className="font-weight-bold">Date Of Birth : </span>{' '}
+              {current.DateOfBirth}
+            </h5>
+
+            <h5>
+              <span className="font-weight-bold">Nationality : </span>{' '}
+              {current.nationality}
+            </h5>
           </div>
-        
-          
+
           <div>
             <ul>
-              <li><h5><span className="font-weight-bold">Employee Status : </span> {current.employment_status}</h5></li>
-              <li><h5><span className="font-weight-bold">Application Status : </span> {current.application_status}</h5></li>
-              <li><h5><span className="font-weight-bold">Van registration : </span> {current.reg_number}</h5></li>
-              <li><h5><span className="font-weight-bold">NINo: </span> {current.niNo}</h5></li>
-              <li><h5><span className="font-weight-bold">FD : </span> {current.fd_number}</h5></li>
-              <li><h5><span className="font-weight-bold">DrivingLicenceNo : </span> {current.drivingLicenceNo}</h5></li>
-              <li><h5><span className="font-weight-bold">DL issued in : </span> {current.dl_status}</h5></li>
-              <li><h5><span className="font-weight-bold">Additional driver application : </span> {current.driver_app}</h5></li>
-              <li><h5><span className="font-weight-bold">DBS certificate : </span>{current.dbs_certificate}</h5></li>
-              <li><h5><span className="font-weight-bold">UTR : </span>{current.utr}</h5></li>
-              <li><h5><span className="font-weight-bold">User ID : </span>{current.utr_id}</h5></li>
-              <li><h5><span className="font-weight-bold">Code : </span>{current.utr_code}</h5></li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">Employee Status : </span>{' '}
+                  {current.employment_status}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">
+                    Application Status :{' '}
+                  </span>{' '}
+                  {current.application_status}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">Van registration : </span>{' '}
+                  {current.reg_number}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">NINo: </span>{' '}
+                  {current.niNo}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">FD : </span>{' '}
+                  {current.fd_number}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">DrivingLicenceNo : </span>{' '}
+                  {current.drivingLicenceNo}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">DL issued in : </span>{' '}
+                  {current.dl_status}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">
+                    Additional driver application :{' '}
+                  </span>{' '}
+                  {current.driver_app}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">DBS certificate : </span>
+                  {current.dbs_certificate}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">UTR : </span>
+                  {current.utr}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">User ID : </span>
+                  {current.utr_id}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">Code : </span>
+                  {current.utr_code}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">Passport : </span>
+                  {current.passport}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">Id card : </span>
+                  {current.Id}
+                </h5>
+              </li>
+              <li>
+                <h5>
+                  <span className="font-weight-bold">DVLA : </span>
+                  {current.dvla}
+                </h5>
+              </li>
             </ul>
           </div>
         </div>
