@@ -124,7 +124,7 @@ const EmployeeForm = props => {
         name="email"
         onChange={onChange}
         title="Enter valid email address"
-        required
+        
       />
       <input
         type="email"
