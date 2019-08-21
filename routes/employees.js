@@ -107,6 +107,7 @@ router.post(
       let employee = await newEmployee.save();
       res.json(employee);
     } catch (err) {
+      console.log("tuuuuuuuk")
       console.log(err.message);
       res.status(500).send('Server Error');
     }

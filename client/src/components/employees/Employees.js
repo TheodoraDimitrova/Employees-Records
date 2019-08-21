@@ -12,7 +12,7 @@ const Employees = () => {
     getEmployees();
     
     //eslint-disable-next-line
-  }, [employees]);
+  }, []);
 
   if(employees===null || loading){
     return <Loader/>
