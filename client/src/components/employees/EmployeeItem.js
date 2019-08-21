@@ -13,7 +13,7 @@ const EmployeeItem = ({ employee }) => {
             : 'border-danger')
         }
       >
-        <h3 style={style_1} className={
+        <h3 style={style_1} className={"d-inline " +
           (employee.application_status === 'Complete'
             ? 'bg-success'
             : 'bg-danger')}>{employee.name}</h3>
@@ -42,9 +42,8 @@ const EmployeeItem = ({ employee }) => {
     </div>
   );
 };
-let style_1 = {
- 
-  display: 'inline-block'
+let style_1 = { 
+  display: 'inline'
 };
 EmployeeItem.propTypes = {
   employee: PropTypes.object.isRequired

@@ -28,9 +28,7 @@ router.post(
   [
     auth,
     [
-      check('name', 'Please enter a name!')
-        .not()
-        .isEmpty()
+      check('name', 'Please enter a name!').not().isEmpty()
       //check('email', 'Please include valid email!').isEmail()
     ]
   ],
@@ -109,7 +107,6 @@ router.post(
       let employee = await newEmployee.save();
       res.json(employee);
     } catch (err) {
-      
       console.log(err.message);
       res.status(500).send('Server Error');
     }
